@@ -2,8 +2,8 @@ import axios from 'axios';
 
 //Define a URL base da origem para consumo do servico
 export default axios.create({
-  //baseURL: 'https://grades-api-weriton-machado.herokuapp.com',
-  baseURL: 'http://localhost:3000',
+  baseURL: 'https://tom-machado-transactions-igti.herokuapp.com/api',
+  //baseURL: 'http://localhost:3000',
   headers: {
     'Content-type': 'application/json',
   },
