@@ -16,6 +16,7 @@ import NextButton from './components/PeriodSelector/NextButton.js';
 import PeriodView from './components/PeriodSelector/PeriodView';
 import TableContent from './components/TableContent/TableContent';
 import ModalTransaction from './components/TableContent/ModalTransaction/ModalTransaction.js';
+import Loading from './components/Loading/Loading.js';
 
 export default function App() {
   const [transactionList, setTransactionList] = useState([]);
@@ -188,32 +189,41 @@ export default function App() {
   return (
     <div className="container">
       <Header />
-      <PeriodSelector>
-        <PreviousButton
-          currentIndex={currentIndex}
-          disabled={currentIndex === 0}
-          onChangePeriod={handleChangePeriod}
+      {periodList.length === 0 && <Loading>Aguarde carregando...</Loading>}
+      {periodList.length > 0 && (
+        <PeriodSelector>
+          <PreviousButton
+            currentIndex={currentIndex}
+            disabled={currentIndex === 0}
+            onChangePeriod={handleChangePeriod}
+          />
+          <PeriodView
+            periods={periodList}
+            value={currentPeriod}
+            onChangePeriod={handleChangePeriod}
+          />
+          <NextButton
+            currentIndex={currentIndex}
+            disabled={currentIndex === periodList.length - 1}
+            onChangePeriod={handleChangePeriod}
+          />
+        </PeriodSelector>
+      )}
+      {transactionList.length > 0 && (
+        <Info transactions={filteredTransactions} />
+      )}
+      {transactionList.length > 0 && (
+        <TableHeader>
+          <NewTransactionButton onClick={handleAddTransaction} />
+          <FilterBar onChangeFilter={handleChangeFilter} />
+        </TableHeader>
+      )}
+      {transactionList.length > 0 && (
+        <TableContent
+          transactions={filteredTransactions}
+          onChangeContent={handleEditDeleteTransaction}
         />
-        <PeriodView
-          periods={periodList}
-          value={currentPeriod}
-          onChangePeriod={handleChangePeriod}
-        />
-        <NextButton
-          currentIndex={currentIndex}
-          disabled={currentIndex === periodList.length - 1}
-          onChangePeriod={handleChangePeriod}
-        />
-      </PeriodSelector>
-      <Info transactions={filteredTransactions} />
-      <TableHeader>
-        <NewTransactionButton onClick={handleAddTransaction} />
-        <FilterBar onChangeFilter={handleChangeFilter} />
-      </TableHeader>
-      <TableContent
-        transactions={filteredTransactions}
-        onChangeContent={handleEditDeleteTransaction}
-      />
+      )}
       {modalIsOpen && (
         <ModalTransaction
           onSave={handlePersistData}
