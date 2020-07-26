@@ -19,7 +19,12 @@ export default function ModalTransaction({
     type,
     yearMonthDay,
   } = transaction;
-  const { headerStyle } = Styles;
+  const {
+    flexRowStyle,
+    radioGroupStyle,
+    saveButtonStyle,
+    dataContainerStyle,
+  } = Styles;
 
   const modalMode = id === '' ? 'add' : 'edit';
 
@@ -69,13 +74,15 @@ export default function ModalTransaction({
     <div>
       <Modal
         isOpen={true}
-        style={customStyles}
-        contentLabel="Example Modal"
+        style={modalStyle}
+        contentLabel={
+          modalMode === 'edit' ? 'Edição de lançamento' : 'Adição de lançamento'
+        }
         onRequestClose={handleCloseModal}
-        shouldCloseOnOverlayClick={true}
+        shouldCloseOnOverlayClick={false}
       >
         <form onSubmit={handelSubmit}>
-          <div style={headerStyle}>
+          <div style={flexRowStyle}>
             <h5>
               {modalMode === 'edit'
                 ? 'Edição de lançamento'
@@ -93,12 +100,13 @@ export default function ModalTransaction({
               X
             </span>
           </div>
-          <div>
+          <div style={{ ...flexRowStyle, ...radioGroupStyle }}>
             <Radio
               name="type"
               label="Receita"
               checked={type === '+'}
               disabled={modalMode === 'edit'}
+              color={'green'}
               onChangeValue={handleChangeRadioValue}
             />
             <Radio
@@ -106,9 +114,12 @@ export default function ModalTransaction({
               label={'Despesa'}
               checked={type === '-'}
               disabled={modalMode === 'edit'}
+              color={'red'}
               onChangeValue={handleChangeRadioValue}
             />
-            <div className="input-field col s12">
+          </div>
+          <div style={dataContainerStyle}>
+            <div className="input-field">
               <input
                 id="description"
                 type="text"
@@ -117,11 +128,14 @@ export default function ModalTransaction({
                 onChange={handleInputChange}
                 name="description"
               />
-              <label className="active" htmlFor="description">
+              <label
+                className={description ? 'active' : ''}
+                htmlFor="description"
+              >
                 Descrição
               </label>
             </div>
-            <div className="input-field col s12">
+            <div className="input-field">
               <input
                 id="category"
                 type="text"
@@ -130,11 +144,11 @@ export default function ModalTransaction({
                 onChange={handleInputChange}
                 name="category"
               />
-              <label className="active" htmlFor="category">
+              <label className={category ? 'active' : ''} htmlFor="category">
                 Categoria
               </label>
             </div>
-            <div className="input-field col s12">
+            <div className="input-field">
               <input
                 id="value"
                 type="text"
@@ -147,19 +161,18 @@ export default function ModalTransaction({
                 Valor
               </label>
             </div>
+            <label className="active" htmlFor="date">
+              Data do lançamento:
+            </label>
             <input
               id="date"
               type="date"
               value={yearMonthDay}
               onChange={handleDateChange}
-            ></input>
+            />
           </div>
           <span
-            style={{
-              marginLeft: '5px',
-              marginRight: '5px',
-              fontWeight: 'bold',
-            }}
+            style={saveButtonStyle}
             className="waves-effect waves-light btn blue lighten-1"
             onClick={handleSaveData}
           >
@@ -172,15 +185,29 @@ export default function ModalTransaction({
 }
 
 const Styles = {
-  headerStyle: {
+  flexRowStyle: {
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
   },
+  radioGroupStyle: {
+    padding: '0 50px 0 50px',
+  },
+  saveButtonStyle: {
+    marginTop: '10px',
+    // marginLeft: '10px',
+    marginRight: '10px',
+    width: '100px',
+    fontWeight: 'bold',
+  },
+  dataContainerStyle: {
+    padding: '10px',
+    border: '1px solid lightgray',
+  },
 };
 
-const customStyles = {
+const modalStyle = {
   content: {
     top: '50%',
     left: '50%',

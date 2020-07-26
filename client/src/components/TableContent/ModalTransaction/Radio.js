@@ -5,6 +5,7 @@ export default function Radio({
   label,
   checked,
   disabled,
+  color,
   onChangeValue,
 }) {
   const handleChange = (event) => {
@@ -13,7 +14,7 @@ export default function Radio({
   };
   return (
     <p>
-      <label>
+      <label style={{ color: color }}>
         {disabled ? (
           <input
             id={label}
