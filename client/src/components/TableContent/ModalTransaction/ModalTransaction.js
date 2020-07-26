@@ -37,7 +37,11 @@ export default function ModalTransaction({
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
-    setTransaction({ ...transaction, [name]: value });
+    if ((name = 'value')) {
+      setTransaction({ ...transaction, [name]: Number(value) });
+    } else {
+      setTransaction({ ...transaction, [name]: value });
+    }
   };
 
   const handleDateChange = (event) => {
