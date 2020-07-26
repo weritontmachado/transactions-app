@@ -11,25 +11,25 @@ const dotenv = require('dotenv');
  */
 dotenv.config();
 
-const allowCors = (req, res, next) => {
-  res.set({
-    'Access-Control-Allow-Origin': '*',
-    'Access-Control-Allow-Methods': 'DELETE,GET,PATCH,POST,PUT',
-    'Access-Control-Allow-Headers': 'Content-Type,Authorization',
-  });
+// const allowCors = (req, res, next) => {
+//   res.set({
+//     'Access-Control-Allow-Origin': '*',
+//     'Access-Control-Allow-Methods': 'DELETE,GET,PATCH,POST,PUT',
+//     'Access-Control-Allow-Headers': 'Content-Type,Authorization',
+//   });
 
-  // intercept OPTIONS method
-  if (req.method === 'OPTIONS') {
-    res.send(200);
-  } else {
-    next();
-  }
-};
+//   // intercept OPTIONS method
+//   if (req.method === 'OPTIONS') {
+//     res.send(200);
+//   } else {
+//     next();
+//   }
+// };
 
 const app = express();
 
-// app.use(cors());
-app.use(allowCors);
+app.use(cors());
+// app.use(allowCors);
 
 app.use(express.json());
 

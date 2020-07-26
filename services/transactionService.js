@@ -51,7 +51,7 @@ exports.getPeriods = async (_, res) => {
     if (!data) {
       res.status(404).send({ message: 'Nenhuma transação encontrada' });
     } else {
-      res.set('Access-Control-Allow-Origin', '*');
+      // res.set('Access-Control-Allow-Origin', '*');
       res.send(data);
     }
   } catch (error) {
