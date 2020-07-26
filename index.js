@@ -28,7 +28,7 @@ const allowCors = (req, res, next) => {
 
 const app = express();
 
-app.use(cors());
+// app.use(cors());
 app.use(allowCors);
 
 app.use(express.json());
