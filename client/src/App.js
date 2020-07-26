@@ -26,6 +26,7 @@ export default function App() {
   const [currentPeriod, setCurrentPeriod] = useState({});
   const [currentIndex, setCurrentIndex] = useState(-1);
   const [modalIsOpen, setIsOpen] = useState(false);
+  const [filter, setFilter] = useState('');
 
   useEffect(() => {
     M.AutoInit();
@@ -92,10 +93,10 @@ export default function App() {
   };
 
   const handleChangeFilter = (filter) => {
+    setFilter(filter);
     const newTransactionList = transactionList.filter((transaction) => {
       return transaction.description.toLowerCase().indexOf(filter) >= 0;
     });
-
     setFilteredTransactions(newTransactionList);
   };
 
@@ -216,7 +217,7 @@ export default function App() {
       {transactionList.length > 0 && (
         <TableHeader>
           <NewTransactionButton onClick={handleAddTransaction} />
-          <FilterBar onChangeFilter={handleChangeFilter} />
+          <FilterBar filter={filter} onChangeFilter={handleChangeFilter} />
         </TableHeader>
       )}
       {transactionList.length > 0 && (

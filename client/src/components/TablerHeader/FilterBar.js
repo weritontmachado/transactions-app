@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function FilterBar({ onChangeFilter }) {
+export default function FilterBar({ filter, onChangeFilter }) {
   const handleChange = (event) => {
     const filter = event.target.value.toLowerCase();
     onChangeFilter(filter);
@@ -13,6 +13,7 @@ export default function FilterBar({ onChangeFilter }) {
         type="text"
         className="validate"
         placeholder="Filtro"
+        value={filter}
         onChange={handleChange}
       />
     </div>
