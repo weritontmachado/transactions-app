@@ -26,7 +26,7 @@ export default function App() {
   const [currentPeriod, setCurrentPeriod] = useState({});
   const [currentIndex, setCurrentIndex] = useState(-1);
   const [modalIsOpen, setIsOpen] = useState(false);
-  const [filter, setFilter] = useState('');
+  const [filter, setFilter] = useState(' ');
 
   useEffect(() => {
     M.AutoInit();
