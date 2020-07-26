@@ -11,19 +11,16 @@ const dotenv = require('dotenv');
  */
 dotenv.config();
 
-const allowCrossDomain = function (_, res) {
-  res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
-  res.header(
-    'Access-Control-Allow-Headers',
-    'Content-Type, Authorization, Content-Length, X-Requested-With'
-  );
-};
-
 const app = express();
-app.use(cors());
-app.use(allowCrossDomain);
 app.use(express.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  next();
+});
+
+app.use(cors());
 
 /**
  * Vinculando o React ao app
