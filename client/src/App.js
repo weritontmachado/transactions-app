@@ -76,20 +76,15 @@ export default function App() {
       });
       setTransactionList(transactions.data);
       setFilteredTransactions(transactions.data);
-      limpaFiltro();
     };
 
     fetchTransactions(currentPeriod.period);
+    setFilter('');
   }, [currentPeriod]);
 
   const updateList = (bookmark) => {
     setCurrentPeriod(periodList[0]);
     setCurrentPeriod(bookmark);
-  };
-
-  const limpaFiltro = () => {
-    handleChangeFilter(' ');
-    handleChangeFilter('');
   };
 
   const handleChangePeriod = (newIndex) => {
