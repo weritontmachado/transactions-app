@@ -75,6 +75,7 @@ export default function App() {
       });
       setTransactionList(transactions.data);
       setFilteredTransactions(transactions.data);
+      handleChangeFilter('');
     };
 
     fetchTransactions(currentPeriod.period);
