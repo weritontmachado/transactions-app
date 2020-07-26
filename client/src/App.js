@@ -76,7 +76,7 @@ export default function App() {
       });
       setTransactionList(transactions.data);
       setFilteredTransactions(transactions.data);
-      handleChangeFilter('');
+      limpaFiltro();
     };
 
     fetchTransactions(currentPeriod.period);
@@ -85,6 +85,11 @@ export default function App() {
   const updateList = (bookmark) => {
     setCurrentPeriod(periodList[0]);
     setCurrentPeriod(bookmark);
+  };
+
+  const limpaFiltro = () => {
+    handleChangeFilter(' ');
+    handleChangeFilter('');
   };
 
   const handleChangePeriod = (newIndex) => {
