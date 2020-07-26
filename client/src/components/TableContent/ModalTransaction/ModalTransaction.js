@@ -37,14 +37,7 @@ export default function ModalTransaction({
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
-    if (name === 'value') {
-      setTransaction({
-        ...transaction,
-        [name]: parseFloat(value.replace(',', '.')),
-      });
-    } else {
-      setTransaction({ ...transaction, [name]: value });
-    }
+    setTransaction({ ...transaction, [name]: value });
   };
 
   const handleDateChange = (event) => {
@@ -74,6 +67,8 @@ export default function ModalTransaction({
   };
 
   const handleSaveData = () => {
+    const { value } = transaction;
+    transaction.value = parseFloat(value.replace(',', '.'));
     onSave(transaction);
   };
 
