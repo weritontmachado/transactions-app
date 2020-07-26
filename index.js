@@ -12,12 +12,7 @@ const dotenv = require('dotenv');
 dotenv.config();
 
 const app = express();
-app.use(
-  cors({
-    origin: 'https://tom-machado-desafio-final.herokuapp.com',
-    //origin: 'http://localhost:3000',
-  })
-);
+app.use(cors());
 app.use(express.json());
 
 /**
